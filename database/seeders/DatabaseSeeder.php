@@ -6,9 +6,13 @@ namespace Database\Seeders;
 use App\Models\Card;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Lead;
 use App\Models\Board;
 use App\Models\CardList;
 use Illuminate\Database\Seeder;
+use Database\Seeders\UserTableSeeder;
+use Database\Seeders\LeadTableSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +21,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        
+        $admin  = Admin::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+        ]); 
+
+        $this->call([   
+            LeadTableSeeder::class
+        ]);
+
+
         $user = User::factory()->create(['email' => 'jasper@gmail.com', 'password' => bcrypt('secret')]);
 
         $boards = Board::factory(10)->for($user)->create();
@@ -33,17 +49,6 @@ class DatabaseSeeder extends Seeder
                 'card_list_id'=> $cardList->id
             ]);
         }
-
-        \App\Models\User::factory()->create([
-            'name' => 'User',
-            'email' => 'user@user.com',
-            'password' => 'user12345',
-        ]);
-        \App\Models\Admin::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => 'admin12345',
-        ]);
 
     }
 }

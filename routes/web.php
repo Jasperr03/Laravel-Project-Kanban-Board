@@ -14,6 +14,9 @@ use App\Http\Controllers\Admin\TaskCountController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UserController;
 
+require __DIR__.'/auth.php';
+require __DIR__.'/AdminAuth.php';
+require __DIR__.'/LeadAuth.php';
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/board', [BoardController::class, 'show'])->name('boards.show');
@@ -37,6 +40,26 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 
 });
 
+Route::middleware('auth:admin')->group(function () {
+
+    Route::get('/admin/dashboard', function () { 
+        return Inertia::render('Admin/Dashboard');
+    })->name('admin.dashboard');
+
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+
+    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+});
+
+Route::middleware('auth:lead')->group(function () {
+
+    // dd(auth()->user);
+    Route::get('/lead/dashboard', function(){
+        return Inertia::render('Lead/Dashboard');
+    })->name('lead.dashboard');
+
+});
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -47,27 +70,8 @@ Route::get('/', function () {
     ]);
 });
 
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
-require __DIR__.'/AdminAuth.php';
-
-
-Route::middleware('auth:admin')->group(function () {
-
-    Route::get('/admin/dashboard', function () {
-        // dd(auth()->user());
-        return Inertia::render('Admin/Dashboard');
-    })->name('admin.dashboard');
-
-    Route::get('/admin/reports', [ReportsController::class, 'index'])->name('admin.reports');
-    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
-
-    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
 });

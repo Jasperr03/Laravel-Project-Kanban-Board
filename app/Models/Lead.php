@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Lead extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -56,9 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(Board::class);
     }
 
-
-    public function lead()
+    public function users()
     {
-        return $this->belongsTo(Lead::class);
+        return $this->hasMany(User::class);
     }
 }
