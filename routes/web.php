@@ -10,6 +10,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CardListController;
 use App\Http\Controllers\Admin\TaskCountController;
+use App\Http\Controllers\Lead\LeadController;
 
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UserController;
@@ -54,9 +55,9 @@ Route::middleware('auth:admin')->group(function () {
 Route::middleware('auth:lead')->group(function () {
 
     // dd(auth()->user);
-    Route::get('/lead/dashboard', function(){
-        return Inertia::render('Lead/Dashboard');
-    })->name('lead.dashboard');
+    Route::get('/lead/dashboard', [LeadController::class, 'index'])->name('lead.dashboard');
+
+    Route::get('/lead/members', [LeadController::class, 'members'])->name('lead.members');
 
 });
 

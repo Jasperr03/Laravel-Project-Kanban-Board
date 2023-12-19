@@ -9,12 +9,13 @@ import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue';
     <div>
         <div class="flex flex-col h-screen">
             <nav class="shrink-0 flex justify-between bg-gray-200 px-10 py-3 border-b">
-                <div class="flex items-center">
+                <div class="flex items-center px-2">
                     <img class="m-2 h-9 w-9 squared-full" src="https://nbsc.edu.ph/is/assets/img/nbsclogo.png" alt="">
                     <a class="text-2xl font-sans font-bold tracking-tight" :href="route('boards')">PROBE</a>
                 </div>
-                <div class="flex items-center">
-                    <NavLink :href="route('boards')">My Projects</NavLink>
+                <div class="flex items-center px-2">
+                    <NavLink :href="route('lead.dashboard')">Dashboard</NavLink>
+                    <NavLink :href="route('lead.members')">Members</NavLink>
 
                     <Menu as="div" class="m-3 relative z-10">
                         <MenuButton class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 rounded-full"> 
@@ -38,7 +39,8 @@ import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue';
                                 <MenuItem v-slot="{active}">
                                     <Link
                                         :class="{'bg-gray-100': active}" 
-                                        :href="route('logout')" method="post" as="button"
+                                        :href="route('lead.logout')"
+                                        method="post"
                                         class="w-full text-left block px-4 py-2 text-sm text-gray-700">Log out</Link>
                                 </MenuItem>
                             </MenuItems>
@@ -47,7 +49,7 @@ import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue';
                 </div>
             </nav>
 
-            <main class="flex-1 overflow-hidden">
+            <main class="flex-1">
                 <slot />
             </main>
         </div>
