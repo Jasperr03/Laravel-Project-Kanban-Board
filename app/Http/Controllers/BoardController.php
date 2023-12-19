@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Board;
 use App\Models\Card;
+use App\Models\CardList;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller
@@ -45,11 +46,21 @@ class BoardController extends Controller
             'name' => ['required']
         ]);
 
-        Board::create([
+        $board = Board::create([
             'user_id' => auth()->id(),
             'name' => request('name')
         ]);
 
+        $cardListNames = ['Todo', 'On going', 'Done'];
+
+        foreach ($cardListNames as $listName) {
+            CardList::create([
+                'board_id' => $board->id,
+                'user_id' => auth()->id(),
+                'name' => $listName
+            ]);
+        }
+        
         return redirect()->back();
     }
 }

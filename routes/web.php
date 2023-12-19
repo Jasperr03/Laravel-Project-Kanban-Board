@@ -11,6 +11,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CardListController;
 use App\Http\Controllers\Admin\TaskCountController;
 
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\UserController;
+
+
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/board', [BoardController::class, 'show'])->name('boards.show');
     Route::get('/boards/{board}/{card?}', [BoardController::class, 'show'])->name('boards.show');
@@ -23,7 +27,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::put('/cards/{card}', [CardController::class, 'update'])->name('cards.update');
     Route::put('/cards/{card}/move', [CardController::class, 'move'])->name('cards.move');
     Route::delete('/cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');
-    Route::get('cards', [TaskCountController::class, 'index']);
+    Route::get('cards', [TaskCountController::class, 'index'])->name('cards');
 
     Route::get('/media/create', function () {
         return Inertia::render('CardListItemModal');
@@ -61,6 +65,8 @@ Route::middleware('auth:admin')->group(function () {
         return Inertia::render('Admin/Dashboard');
     })->name('admin.dashboard');
 
+    Route::get('/admin/reports', [ReportsController::class, 'index'])->name('admin.reports');
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 
     Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
 });
