@@ -26,4 +26,13 @@ class LeadController extends Controller
         ]);
 
     }
+
+    public function showMember($id)
+    {
+        $user = User::findOrFail($id);
+
+        return Inertia::render('Lead/User', [
+            'user' => $user,
+        ]);
+    }
 }

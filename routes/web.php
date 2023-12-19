@@ -58,7 +58,7 @@ Route::middleware('auth:lead')->group(function () {
     Route::get('/lead/dashboard', [LeadController::class, 'index'])->name('lead.dashboard');
 
     Route::get('/lead/members', [LeadController::class, 'members'])->name('lead.members');
-
+    Route::get('/lead/user/{id}', [LeadController::class, 'showMember'])->name('lead.member.show');
 });
 
 
