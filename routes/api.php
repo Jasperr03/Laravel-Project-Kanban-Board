@@ -29,16 +29,4 @@ Route::get('/admins', AdminCountController::class);
 Route::get('/boards', ProjectCountController::class);
 Route::get('/cards', TaskCountController::class); 
 
-
-require __DIR__.'/AdminAuth.php';
-Route::middleware('auth:admin')->get('/user', function () {
-
-    dd(auth()->user());
-
-    try {
-        return response()->json(['user' => auth()->user()]);
-    } catch (\Exception $e) {
-        Log::error($e->getMessage());
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
-});
+ 

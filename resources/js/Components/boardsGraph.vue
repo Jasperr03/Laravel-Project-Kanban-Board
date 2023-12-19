@@ -139,7 +139,7 @@ export default {
             </div>
         </div>
 
-        <div style="height: 300px;"> <!-- Set a fixed height for the container -->
+        <div style="height: 400px;"> <!-- Set a fixed height for the container -->
             <canvas ref="chart"></canvas>
         </div>
  

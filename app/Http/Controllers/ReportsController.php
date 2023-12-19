@@ -41,7 +41,8 @@ class ReportsController extends Controller
     public function boards()
     {
         // Fetch all cards from the database
-        $boards = Board::all();
+        // $boards = Board::all();
+        $boards = Board::with('user')->get();
 
         return response()->json([
             'boards' => $boards,

@@ -2,6 +2,7 @@
 import UserGraph from '@/Components/usersGraph.vue';  // Adjust the path based on your project structure
 import cardsGraph from '@/Components/cardsGraph.vue';  // Adjust the path based on your project structure
 import boardsGraph from '@/Components/boardsGraph.vue';  // Adjust the path based on your project structure
+import boardTable from '@/Components/boardTable.vue';
 import AdminAuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout.vue';
 
 </script>
@@ -9,7 +10,7 @@ import AdminAuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout.vue';
 <template>
     <AdminAuthenticatedLayout>
 
-        <div class="grid grid-cols-2 gap-4 mb-2 pl-64 h-full overflow-y-hidden">
+        <div class="grid grid-cols-2 gap-4 mb-10 pl-64 h-full overflow-y-hidden pb-10">
 
             <div class="p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <UserGraph :data="userData"/> 
@@ -23,7 +24,11 @@ import AdminAuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout.vue';
                 <boardsGraph :data="boardData"/>
             </div>
 
-        </div>
+            <div class="px-2 py-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <boardTable :data="boardTableData"/>
+            </div>
+
+        </div> 
 
         
     </AdminAuthenticatedLayout>
@@ -40,6 +45,9 @@ export default {
                 // ... data structure expected by UsersGraph
             },
             boardData: {
+                // ... data structure expected by UsersGraph
+            },
+            boardTableData: {
                 // ... data structure expected by UsersGraph
             }
         };
