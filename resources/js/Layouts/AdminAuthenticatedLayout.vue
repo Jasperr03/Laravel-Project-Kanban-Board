@@ -79,7 +79,9 @@ import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue';
                       <img class="m-2 h-9 w-9 squared-full" src="https://nbsc.edu.ph/is/assets/img/nbsclogo.png" alt="">
                       <a class="text-2xl font-sans font-bold tracking-tight" :href="route('admin.dashboard')">PROBE</a>
                   </div>
+                  
                   <UserInfo />
+
                   <div id="menu" class="flex flex-col space-y-2">
                     <a :href="route('admin.dashboard')" class="flex items-center justify-start gap-4 text-sm font-medium text-gray-700 py-2 px-2 hover:bg-blue-600 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
                     >

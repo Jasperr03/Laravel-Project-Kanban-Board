@@ -62,6 +62,7 @@ require __DIR__.'/AdminAuth.php';
 Route::middleware('auth:admin')->group(function () {
 
     Route::get('/admin/dashboard', function () {
+        // dd(auth()->user());
         return Inertia::render('Admin/Dashboard');
     })->name('admin.dashboard');
 

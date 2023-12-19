@@ -24,6 +24,9 @@ use App\Http\Controllers\UserController;
 Route::get('/getUsers', [ReportsController::class, 'users']);
 Route::get('/getBoards', [ReportsController::class, 'boards']);
 Route::get('/getCards', [ReportsController::class, 'cards']);
+ 
+Route::get('/currentUser', [UserController::class, 'currentUser']); 
+
 Route::get('/users', UserCountController::class);
 Route::get('/admins', AdminCountController::class);
 Route::get('/boards', ProjectCountController::class);
