@@ -27,5 +27,17 @@ class LeadTableSeeder extends Seeder
         User::factory()->count(20)->create([
             'lead_id' => $lead->id,
         ]);
+
+        $lead2 = Lead::factory()->create([
+            'name' => 'Proj Lead',
+            'email' => 'lead2@lead.com',
+            'email_verified_at' => now(),
+            'password' => 'password', // password
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::factory()->count(20)->create([
+            'lead_id' => $lead->id,
+        ]);
     }
 }
