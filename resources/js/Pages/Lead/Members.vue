@@ -27,7 +27,11 @@
                             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                                 v-for="user in paginatedFilteredUsers" :key="user.id">
                                 <td class="w-4 p-4">{{ user.id }}</td>
-                                <td class="w-4 p-4">{{ user.name }}</td>
+                                <td class="w-4 p-4">
+                                    <a :href="route('lead.member.show', user.id)">
+                                        {{ user.name }}
+                                    </a>
+                                </td>
                                 <td class="w-4 p-4">{{ user.email }}</td>
                                 <td class="w-4 p-4">{{ user.created_at }}</td>
                             </tr>
@@ -136,7 +140,6 @@ export default {
 </script>
 
 <style scoped>
-/* Add style for the canvas text color */
 #userTable {
     position: relative;
     z-index: 90;

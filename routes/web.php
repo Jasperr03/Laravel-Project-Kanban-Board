@@ -53,12 +53,9 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 Route::middleware('auth:lead')->group(function () {
-
-    // dd(auth()->user);
     Route::get('/lead/dashboard', [LeadController::class, 'index'])->name('lead.dashboard');
-
     Route::get('/lead/members', [LeadController::class, 'members'])->name('lead.members');
-
+    Route::get('/lead/user/{id}', [LeadController::class, 'showMember'])->name('lead.member.show');
 });
 
 

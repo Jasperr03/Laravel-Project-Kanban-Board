@@ -29,15 +29,15 @@ class LeadTableSeeder extends Seeder
         ]);
 
         $lead2 = Lead::factory()->create([
-            'name' => 'Proj Lead',
-            'email' => 'lead2@lead.com',
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => 'password', // password
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ]);
 
         User::factory()->count(20)->create([
-            'lead_id' => $lead->id,
+            'lead_id' => $lead2->id,
         ]);
     }
 }
