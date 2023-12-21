@@ -22,11 +22,14 @@ class LeadController extends Controller
         $user = auth()->user();
 
         // Assuming you have a "users" relationship in your Lead model
-        $users = User::where('lead_id', $user->id)->get();
+        $users = User::where('lead_id', $user->id)->orderBy('created_at', 'desc')->get();
+
+        foreach($users as $lead) {
+            $user['lead_id'] = $lead->id;
+        }
 
         return Inertia::render('Lead/Members', [
             'users' => $users,
-            'current-user' => $user,
         ]);
 
     }
@@ -70,24 +73,24 @@ class LeadController extends Controller
 
     public function createMember(Request $request)
     {
-        // Validate the incoming request data
+        // Validate the request data
         $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            // Add more validation rules as needed
+            // Add other validation rules as needed
+        ]);
+ 
+        // Create a new user
+        $user = new User([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'lead_id' => auth()->user()->id, // Use the authenticated lead's ID as the lead_id
+            'password' => bcrypt('default_password'), // You may want to set a default password or generate one
         ]);
 
-        // Create a new member
-        $member = User::create($validatedData);
+        $user->save();
 
-        $lead = auth()->user();
-        
-        $member->lead()->associate($lead)->save();
-
-        return response()->json([
-            'message' => 'Member added successfully', 
-            'member' => $member]
-        );
+        return redirect()->route('lead.member.show', $user->id);
     }
 
     public function createBoard(Request $request)

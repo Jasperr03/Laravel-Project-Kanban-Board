@@ -5,7 +5,7 @@
                 <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 w-full">
                     <div class="flex gap-2 items-center">
                         <h1 class="text-2xl text-gray-900 m-0">List of Users</h1>
-                          <button @click="createMember" class="flex items-center gap-2 p-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
+                          <button @click="openCreateMemberModal" class="flex items-center gap-2 p-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
                             Create Member
                         </button>
                     </div>
@@ -55,18 +55,46 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal overlay -->
+        <div v-if="isCreateMemberModalOpen" class="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
+          <!-- Modal content -->
+          <div class="bg-white p-6 rounded-lg w-96">
+            <h2 class="text-lg font-semibold mb-4">Create Member</h2>
+            <!-- Your form fields go here -->
+            <form @submit.prevent="submitCreateMemberForm">
+              <!-- Example: Name input -->
+              <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input v-model="newMember.name" type="text" id="name" name="name" class="mt-1 p-2 border rounded w-full">
+              </div>
+
+              <!-- Example: Email input -->
+              <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input v-model="newMember.email" type="email" id="email" name="email" class="mt-1 p-2 border rounded w-full">
+              </div>
+
+              <!-- Add other form fields as needed -->
+
+              <div class="flex justify-end">
+                <button type="button" @click="closeCreateMemberModal" class="mr-2 px-4 py-2 text-gray-500 border rounded">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
     </LeadAuthenticatedLayout>
 </template>
 
 
 <script setup>
 import LeadAuthenticatedLayout from '@/Layouts/LeadAuthenticatedLayout.vue';
-import { ref, computed } from 'vue';
+import { ref, computed  } from 'vue';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import _ from 'lodash';
-
-
+import axios from 'axios';
 
 dayjs.extend(relativeTime);
 
@@ -128,6 +156,41 @@ const createMember = async () => {
      alert('Not yet!')
 };
 
+// Modal 
+const isCreateMemberModalOpen = ref(false);
+
+const openCreateMemberModal = () => {
+    isCreateMemberModalOpen.value = true;
+};
+
+const closeCreateMemberModal = () => {
+    isCreateMemberModalOpen.value = false;
+};
+
+const newMember = ref({
+    name: '',
+    email: '', 
+});
+
+const submitCreateMemberForm = async () => {
+    try {
+        // Make an API call to create a new member using newMember.value data
+        const response = await axios.post('/lead/member/create', newMember.value); // Replace with your actual API endpoint
+        const createdMember = response.data;
+
+        // Assuming the API returns the created member details, you can handle the response here
+        console.log('Created Member:', createdMember);
+
+        // Optionally, you can refresh the user list or perform other actions after creating a member
+
+        // Close the modal after successful submission
+        closeCreateMemberModal();
+    } catch (error) {
+        console.error('Error creating member:', error);
+        // Handle errors
+    }
+};
+
 
 </script>
 
@@ -143,6 +206,5 @@ export default {
 #userTable {
     position: relative;
     z-index: 90;
-
 }
 </style>
