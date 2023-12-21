@@ -91,7 +91,7 @@ export default {
     <div class="grid grid-cols-4 gap-4 mb-4 pl-64 overflow-y-hidden">
         <div class="w-full">
 
-            <div class="bg-gradient-to-b from-blue-600 via-purple-500 to-indigo-700 border rounded-lg shadow p-2">
+            <div class="bg-blue-800 border rounded-lg shadow p-2">
                 <div class="flex flex-row items-center">
                     <div class="flex-shrink pl-1 pr-4"><i class="fa fa-wallet fa-2x fa-fw fa-inverse"></i></div>
                     <div class="flex-1 text-right">
@@ -106,7 +106,7 @@ export default {
             </div>
         </div>
         <div class="w-full">
-            <div class="bg-gradient-to-b from-yellow-300 via-orange-400 to-yellow-500 border rounded-lg shadow p-2">
+            <div class="bg-blue-800 border rounded-lg shadow p-2">
                 <div class="flex flex-row items-center">
                     <div class="flex-shrink pl-1 pr-4"><i class="fas fa-users fa-2x fa-fw fa-inverse"></i></div>
                     <div class="flex-1 text-right">
@@ -121,7 +121,7 @@ export default {
             </div>
         </div>
         <div class="w-full">
-            <div class="bg-gradient-to-b from-teal-400 via-teal-500 to-teal-600 border rounded-lg shadow p-2">
+            <div class="bg-blue-800 border rounded-lg shadow p-2">
                 <div class="flex flex-row items-center">
                     <div class="flex-shrink pl-1 pr-4"><i class="fas fa-user-plus fa-2x fa-fw fa-inverse"></i></div>
                     <div class="flex-1 text-right pr-1">
@@ -136,7 +136,7 @@ export default {
             </div>
         </div>
         <div class="w-full">
-            <div class="bg-gradient-to-b from-rose-500 via-rose-600 to-rose-700 border rounded-lg shadow p-2">
+            <div class="bg-blue-800 border rounded-lg shadow p-2">
                 <div class="flex flex-row items-center">
                     <div class="flex-shrink pl-1 pr-4"><i class="fas fa-server fa-2x fa-fw fa-inverse"></i></div>
                     <div class="flex-1 text-right">

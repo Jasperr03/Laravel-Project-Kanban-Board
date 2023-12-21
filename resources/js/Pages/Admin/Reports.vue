@@ -10,9 +10,9 @@ import AdminAuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout.vue';
 <template>
     <AdminAuthenticatedLayout>
 
-        <div class="grid grid-cols-2 gap-4 mb-10 pl-64 h-full overflow-y-hidden pb-10">
+        <div class="bg-slate-600 grid grid-cols-2 gap-4 mb-10 pl-64 h-full overflow-y-hidden pb-10">
 
-            <div class="p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-4 text-white bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <UserGraph :data="userData"/> 
             </div>
 
