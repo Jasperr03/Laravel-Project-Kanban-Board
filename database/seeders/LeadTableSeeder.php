@@ -16,28 +16,17 @@ class LeadTableSeeder extends Seeder
      */
     public function run(): void
     {
+       
         $lead = Lead::factory()->create([
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => 'ProdLead',
+            'email' => 'lead@lead.com',
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => 'lead3', // password
             'remember_token' => Str::random(10),
         ]);
 
-        User::factory()->count(20)->create([
+        User::factory()->count(50)->create([
             'lead_id' => $lead->id,
-        ]);
-
-        $lead2 = Lead::factory()->create([
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::factory()->count(20)->create([
-            'lead_id' => $lead2->id,
         ]);
     }
 }
