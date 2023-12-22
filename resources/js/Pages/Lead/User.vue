@@ -1,6 +1,6 @@
 <template>
     <LeadAuthenticatedLayout>
-        <div class="max-w-5xl mx-auto mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="max-w-5xl mx-auto mt-4 p-6">
             <div class="mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <h2 class="text-xl mb-2">User Details</h2> 
                 <p class="text-lg"> {{ user.name }}</p>
@@ -10,7 +10,7 @@
             <div class="flex gap-2">
                 <div class="w-1/3 mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <div class="flex justify-between align-center mb-4">
-                        <h2 class="text-xl mb-2">Boards</h2>
+                        <h2 class="text-xl flex items-center">Boards</h2>
                         <button @click="openCreateBoardModal" class="flex items-center gap-2 p-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
                             Create Board
                         </button>
@@ -18,7 +18,7 @@
 
                     <!-- Display boards -->
                     <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                        <button class="w-full flex items-center gap-2 p-1 px-4 bg-blue-500 text-white rounded hover:bg-blue-700"
+                        <button class="w-full flex uppercase items-center gap-2 p-1 px-4 bg-blue-500 text-white rounded hover:bg-blue-700"
                             v-for="board in boards" :key="board.id" @click="fetchCardList(board.id, board.name)">
                             {{ board.name }}
                             <!-- Display other board details as needed -->
@@ -34,7 +34,7 @@
                     </div>
 
                     <!-- Display selected board name -->
-                    <p class="mb-4" v-if="selectedBoardName">Board: <span class="font-semibold text-lg">{{ selectedBoardName }}</span></p>
+                    <p class="mb-4" v-if="selectedBoardName">Board: <span class="font-semibold text-lg uppercase">{{ selectedBoardName }}</span></p>
 
                     <!-- Display cards -->
                     <table class="min-w-full divide-y divide-gray-200">
@@ -51,7 +51,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                                        <li v-for="list in card.cards" :key="list.id">
+                                        <li v-for="list in card.cards" :key="list.id" class="uppercase">
                                             {{ list.title }}
                                         </li>
                                     </ul>
@@ -100,35 +100,27 @@ onMounted(() => {
 });
 
 const fetchUserDetails = (userId) => {
-    console.log('Fetching user details for user ID:', userId);
-    // Assuming you have an API endpoint to fetch boards for a user
-    // Replace 'your_api_endpoint' with the actual API endpoint
+    console.log('Fetching user details for user ID:', userId); 
     fetch(`/api/boards/${userId}`)
         .then(response => response.json())
-        .then(data => {
-            // Assuming the response has a 'board' property containing an array of boards
+        .then(data => { 
             boards.value = data.board;
         })
         .catch(error => console.error('Error fetching boards:', error));
 };
 
 const fetchCardList = (boardId, boardName) => {
-    console.log('Fetching card list for board ID:', boardId);
-    // Assuming you have an API endpoint to fetch card list for a board
-    // Replace 'your_api_endpoint' with the actual API endpoint
+    console.log('Fetching card list for board ID:', boardId); 
     fetch(`/api/card-lists/${boardId}/${user.id}`)
         .then(response => response.json())
-        .then(data => {
-            // Assuming the response has a 'card_list' property containing an array of cards
+        .then(data => { 
             cardList.value = data.card_list;
-            selectedBoardName.value = boardName; // Set the selected board name
+            selectedBoardName.value = boardName; 
         })
         .catch(error => console.error('Error fetching card list:', error));
 };
 
-const createBoard = () => {
-    // Make an API call to create a new board
-    // Replace 'your_api_endpoint' with the actual API endpoint
+const createBoard = () => { 
     fetch('/api/boards', {
         method: 'POST',
         headers: {
@@ -140,9 +132,7 @@ const createBoard = () => {
         }),
     })
         .then(response => response.json())
-        .then(data => {
-            // Assuming the response has a 'board' property containing the newly created board
-            // You can add it to the 'boards' array if needed
+        .then(data => { 
             boards.value.push(data.board);
             closeCreateBoardModal();
         })
@@ -155,19 +145,17 @@ const openCreateBoardModal = () => {
 
 const closeCreateBoardModal = () => {
     isCreateBoardModalVisible.value = false;
-    newBoardName.value = ''; // Clear the input field
+    newBoardName.value = '';  
 };
 
-const printTable = () => {
-    // Open the print dialog
+const printTable = () => { 
     window.print();
 };
 </script>
 
 
 <style scoped>
-@media print {
-    /* Hide elements other than the table when printing */
+@media print { 
     #app > div > div > main > div.max-w-5xl.mx-auto.mt-4.p-6.bg-white.border.border-gray-200.rounded-lg.shadow.dark\:bg-gray-800.dark\:border-gray-700 > div.flex.gap-2 > div.w-1\/3.mt-4.p-6.bg-white.border.border-gray-200.rounded-lg.shadow.dark\:bg-gray-800.dark\:border-gray-700 > div > button,
      #app > div > div > main > div.max-w-5xl.mx-auto.mt-4.p-6.bg-white.border.border-gray-200.rounded-lg.shadow.dark\:bg-gray-800.dark\:border-gray-700 > div.flex.gap-2 > div.w-full.mt-4.p-6.bg-white.border.border-gray-200.rounded-lg.shadow.dark\:bg-gray-800.dark\:border-gray-700 > div > button{
         display: none;

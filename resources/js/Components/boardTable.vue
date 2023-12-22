@@ -108,6 +108,7 @@ export default {
           <th class="py-2 px-4 border-b">ID</th>
           <th class="py-2 px-4 border-b">Name</th>
           <th class="py-2 px-4 border-b">Owner</th>
+          <th class="py-2 px-4 border-b">Status</th>
           <th class="py-2 px-4 border-b">Date Created</th>
           <!-- Add more columns if needed -->
         </tr>
@@ -116,14 +117,19 @@ export default {
         <tr
             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
             v-for="board in paginatedBoards" :key="board.id">
-          <td class="w-4 p-4">{{ board.id }}</td>
-          <td class="w-4 p-4">
+          <td class="w-4 p-2 py-4">{{ board.id }}</td>
+          <td class="w-4 p-2 py-4">
             <a :href="route('admin.board', board.id)">
                 {{ board.name }}
             </a>
           </td>
-          <td class="w-4 p-4">{{ board.user.name }} - {{ board.user.email }}</td>
-          <td class="w-4 p-4">{{ formatDate(board.created_at) }}</td>
+          <td class="w-4 p-2 py-4">{{ board.user.name }}</td>
+          <td class="w-4 p-2 py-4 text-white">
+            <span class="uppercase py-2 px-4 rounded" :class="[`${ board.archived ? 'bg-red-800':'bg-green-800'}`]">
+              {{ board.archived ? 'Archived' : 'Active' }}
+            </span>
+          </td>
+          <td class="w-4 p-2 py-4">{{ formatDate(board.created_at) }}</td>
           <!-- Add more columns if needed -->
         </tr>
       </tbody>

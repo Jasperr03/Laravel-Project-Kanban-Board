@@ -65,6 +65,7 @@ class LeadController extends Controller
     public function getCardByCardList($board_id, $user_id, $card_list_id)
     {
         $card = Card::where(['board_id' => $board_id, 'user_id' => $user_id, 'card_list_id' => $card_list_id])->get();
+        
 
         return response()->json([
             'card' => $card,

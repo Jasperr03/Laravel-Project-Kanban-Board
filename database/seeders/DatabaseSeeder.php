@@ -38,15 +38,36 @@ class DatabaseSeeder extends Seeder
         $boards = Board::factory(10)->for($user)->create();
 
         foreach ($boards as $board) {
-            $cardList = CardList::factory()->create([
+            $cardList = CardList::create([
                 'board_id' =>$board->id,
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'name' => 'Todo'
+            ]);
+            $cardList2 = CardList::create([
+                'board_id' =>$board->id,
+                'user_id' => $user->id,
+                'name' => 'On Going'
+            ]);
+            $cardList3 = CardList::create([
+                'board_id' =>$board->id,
+                'user_id' => $user->id,
+                'name' => 'Done'
             ]);
 
-            Card::factory(50)->create([
+            Card::factory(10)->create([
                 'board_id' =>$board->id,
                 'user_id' => $user->id,
                 'card_list_id'=> $cardList->id
+            ]);
+            Card::factory(10)->create([
+                'board_id' =>$board->id,
+                'user_id' => $user->id,
+                'card_list_id'=> $cardList2->id
+            ]);
+            Card::factory(10)->create([
+                'board_id' =>$board->id,
+                'user_id' => $user->id,
+                'card_list_id'=> $cardList3->id
             ]);
         }
 

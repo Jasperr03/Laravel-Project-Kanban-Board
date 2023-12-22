@@ -21,7 +21,7 @@ class CardListFactory extends Factory
         return [
             'user_id' =>User::factory(),
             'board_id' =>Board::factory(),
-            'name' => $this->faker->name,
+            'name' => $this->faker->sentence,
         ];
     }
 }
