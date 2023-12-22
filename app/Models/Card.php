@@ -37,4 +37,9 @@ class Card extends Model
 
         });
     }
+
+    public function medias(): HasMany
+    {
+        return $this->hasMany(Media::class);
+    }
 }

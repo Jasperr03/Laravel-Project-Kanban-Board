@@ -16,13 +16,14 @@ class MediaController extends Controller
           ]);
   
           $file = request()->file('file');
-  
+          
           $media = Media::create([
               'name' => $file->getClientOriginalName(),
               'file_name' => $file->getClientOriginalName(),
               'mime_type' => $file->getMimeType(),
               'size' => $file->getSize(),
-              'user_id' => auth()->id() 
+              'user_id' => auth()->id(),
+              'card_id' => 0,
           ]);
   
           // media/year/month/day/id

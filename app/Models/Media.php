@@ -68,4 +68,9 @@ class Media extends Model
 
         return $fileType['preview_url'] ?? asset("image/file-type-other.svg");
     }
+
+    public function card()
+    {
+        return $this->belongsTo(Card::class);
+    }
 }
