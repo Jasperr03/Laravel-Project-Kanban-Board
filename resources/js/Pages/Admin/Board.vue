@@ -68,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700" v-for="card in paginatedFilteredCards" :key="card.id">
+                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700" v-for="card in list" :key="card.id">
                             <td class="w-4 p-4">{{ card.id }}</td>
                             <td class="w-4 p-4"  @click="openListModal(card.name)" >{{ card.name }}</td>  
 
@@ -164,7 +164,7 @@ const downloadCSV = () => {
 // Modal 
 const modalContent = ref('');
 const listModal = ref(false);
-const list = ref([]);
+const lists = ref([]);
 
 const fetchList = (boardId, userID) => {
     console.log('Fetching card list for board ID:', boardId);
@@ -175,7 +175,7 @@ const fetchList = (boardId, userID) => {
         .then(response => response.json())
         .then(data => {
             // Assuming the response has a 'card_list' property containing an array of cards
-            list.value = data.card_list; 
+            lists.value = data.card_list; 
         })
         .catch(error => console.error('Error fetching card list:', error));
 };
