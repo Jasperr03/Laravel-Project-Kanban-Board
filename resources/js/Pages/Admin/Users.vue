@@ -22,6 +22,7 @@
                             <th class="py-2 px-4 border-b">{{ headers[1].text }}</th>
                             <th class="py-2 px-4 border-b">{{ headers[2].text }}</th>
                             <th class="py-2 px-4 border-b">{{ headers[3].text }}</th>
+                            <th class="py-2 px-4 border-b">{{ headers[4].text }}</th>
                              
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                             <td class="w-4 p-4">{{ user.id }}</td>
                             <td class="w-4 p-4">{{ user.name }}</td>
                             <td class="w-4 p-4">{{ user.email }}</td>
+                            <td class="w-4 p-4">{{ user.lead ? user.lead.name : 'N/A' }}</td>
                             <td class="w-4 p-4">{{ dayjs(user.created_at).format('YYYY-MM-DD HH:mm:ss') }}</td>
 
 
@@ -123,6 +125,7 @@ const headers = ref([
     { text: 'ID', value: 'id' },
     { text: 'Name', value: 'name' },
     { text: 'Email', value: 'email' },
+    { text: 'Lead', value: 'lead' },
     { text: 'Created At', value: 'created_at' },
 ]);
 

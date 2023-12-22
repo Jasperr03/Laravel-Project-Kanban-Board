@@ -17,6 +17,17 @@ defineProps({
         required: true,
     },
 });
+
+const dropdown = {
+    open: false,
+    toggleDropdown() {
+        this.open = !this.open;
+    },
+    closeDropdown() {
+        this.open = false;
+    },
+};
+
 </script>
 
 <template>
@@ -34,30 +45,29 @@ defineProps({
             >
 
             <template v-else> 
+                <div class="flex">
+                    <div x-data="dropdown" class="relative">
+                        <button @click="toggleDropdown" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                            Login
+                        </button>
 
-                <Link
-                    :href="route('login')"
-                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >Login</Link
-                >
-                <Link
-                    :href="route('lead.login')"
-                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >Lead</Link
-                >
-                <Link
-                    :href="route('admin.login')"
-                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >Admin</Link
-                >
+                        <div x-show="open" @click.away="closeDropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-md">
+                            <a :href="route('login')" class="block flex justify-start px-4 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Login</a>
+                            <a :href="route('lead.login')" class="block flex justify-start px-4 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Lead</a>
+                            <a :href="route('admin.login')" class="block flex justify-start px-4 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Admin</a>
+                        </div>
+                    </div>
 
 
-                <Link
-                    v-if="canRegister"
-                    :href="route('register')"
-                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >Register</Link
-                >
+
+                    <Link
+                        v-if="canRegister"
+                        :href="route('register')"
+                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                        >Register</Link
+                    >
+
+                </div>
 
             </template>
         </div>

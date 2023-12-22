@@ -117,7 +117,11 @@ export default {
             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
             v-for="board in paginatedBoards" :key="board.id">
           <td class="w-4 p-4">{{ board.id }}</td>
-          <td class="w-4 p-4">{{ board.name }}</td>
+          <td class="w-4 p-4">
+            <a :href="route('admin.board', board.id)">
+                {{ board.name }}
+            </a>
+          </td>
           <td class="w-4 p-4">{{ board.user.name }} - {{ board.user.email }}</td>
           <td class="w-4 p-4">{{ formatDate(board.created_at) }}</td>
           <!-- Add more columns if needed -->

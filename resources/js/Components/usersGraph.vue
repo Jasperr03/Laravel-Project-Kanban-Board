@@ -47,7 +47,13 @@ export default {
                     return acc;
                 }, {});
 
-                const labels = Object.keys(groupedData);
+                // Sort labels in ascending order (from past to present)
+                const labels = Object.keys(groupedData).sort((a, b) => {
+                    const dateA = new Date(a);
+                    const dateB = new Date(b);
+                    return dateA - dateB;
+                });
+ 
                 const counts = Object.values(groupedData);
 
                 this.chartData.labels = labels;

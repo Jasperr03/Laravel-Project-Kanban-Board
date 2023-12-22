@@ -152,10 +152,6 @@ const headers = ref([
 
 const searchTerm = ref('');
 
-const createMember = async () => {
-     alert('Not yet!')
-};
-
 // Modal 
 const isCreateMemberModalOpen = ref(false);
 

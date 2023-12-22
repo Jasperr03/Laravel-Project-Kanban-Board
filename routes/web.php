@@ -49,6 +49,8 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 
+    Route::get('/admin/board/{id}', [UserController::class, 'cardList'])->name('admin.board');
+
     Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
 });
 
