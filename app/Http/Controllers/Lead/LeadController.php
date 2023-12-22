@@ -78,6 +78,7 @@ class LeadController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
             // Add other validation rules as needed
         ]);
  
@@ -86,7 +87,7 @@ class LeadController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'lead_id' => auth()->user()->id, // Use the authenticated lead's ID as the lead_id
-            'password' => bcrypt('default_password'), // You may want to set a default password or generate one
+            'password' => bcrypt($validatedData['password']), // You may want to set a default password or generate one
         ]);
 
         $user->save();

@@ -7,7 +7,18 @@ import { store } from '@/store';
 import { Link } from '@inertiajs/vue3';
 import axios from "axios";
 import { onMounted } from 'vue';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
 
+
+dayjs.extend(relativeTime);
+
+const formattedUsers = computed(() => {
+    return getCards.value.map(user => ({
+        ...user,
+        created_at: dayjs(user.created_at).fromNow(),
+    }));
+});
 
 const props = defineProps({
     card: Object
@@ -37,6 +48,12 @@ const getCards = () => {
     .then(res => cards.value = res.data)
     .catch(error => console.log(error))
 }
+
+
+const formatCreatedAt = (createdAt) => {
+    // Format createdAt to a human-readable format
+    return format(new Date(createdAt), 'yyyy-MM-dd HH:mm:ss');
+};
 
 onMounted(() => getCards()
 );
@@ -84,7 +101,7 @@ onMounted(() => getCards()
                     class="text-sm block p-2.5"
                     >{{ card.title }}
                     <h1 class="span flex items-center justify pt-1 pb-0">
-                        <span class="text-sm font-small align-text bg-gray-100 bg: rounded-sm ml-1 mr-1 "> {{ card.created_at }}</span>
+                        <span class="text-sm font-small align-text"> {{ dayjs(card.created_at).format('YYYY-MM-DD HH:mm:ss') }}</span>
                     </h1>   
                 </Link> 
 

@@ -33,12 +33,6 @@ watch(() => props.card, (card) => {
     }
 });
 
-function closeModal() {
-  Inertia.get(route('boards.show', {board: props.card.board_id}), {}, {
-    preserveState:true
-  });
-}
-
 function onSubmit() {
     form.put(route('cards.update', {card: props.card.id}));
 }
@@ -70,11 +64,13 @@ export default {
 
       this.uploadFiles(files);
     },
+    
     onSelectedFiles($event) {
       let files = [...$event.target.files];
       this.uploadFiles(files);
       this.$refs.files.value = null;
     },
+
     uploadFiles(files) {
       files.forEach(file => {
         this.media.unshift({
@@ -243,12 +239,12 @@ export default {
                       type="submit"
                     >Save card
                     </button>
-                    <button
+                    <a
+                    type="button"
                       class="px-4 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none"
-                      type="button"
-                      @click="closeModal()"
+                       :href="route('boards.show', { board: props.card.board_id })" 
                     >Cancel
-                    </button>
+                  </a>
                   </div>
                 </form>
                 <div class="p-5 bg-gray-100 sm:w-48">

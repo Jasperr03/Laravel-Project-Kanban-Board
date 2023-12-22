@@ -62,17 +62,21 @@
           <div class="bg-white p-6 rounded-lg w-96">
             <h2 class="text-lg font-semibold mb-4">Create Member</h2>
             <!-- Your form fields go here -->
-            <form @submit.prevent="submitCreateMemberForm">
-              <!-- Example: Name input -->
+            <form @submit.prevent="submitCreateMemberForm"> 
+
               <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input v-model="newMember.name" type="text" id="name" name="name" class="mt-1 p-2 border rounded w-full">
               </div>
-
-              <!-- Example: Email input -->
+ 
               <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input v-model="newMember.email" type="email" id="email" name="email" class="mt-1 p-2 border rounded w-full">
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input v-model="newMember.password" type="password" id="password" name="password" class="mt-1 p-2 border rounded w-full">
               </div>
 
               <!-- Add other form fields as needed -->
@@ -166,6 +170,7 @@ const closeCreateMemberModal = () => {
 const newMember = ref({
     name: '',
     email: '', 
+    password: '', 
 });
 
 const submitCreateMemberForm = async () => {
@@ -176,9 +181,8 @@ const submitCreateMemberForm = async () => {
 
         // Assuming the API returns the created member details, you can handle the response here
         console.log('Created Member:', createdMember);
-
-        // Optionally, you can refresh the user list or perform other actions after creating a member
-
+ 
+ 
         // Close the modal after successful submission
         closeCreateMemberModal();
     } catch (error) {
