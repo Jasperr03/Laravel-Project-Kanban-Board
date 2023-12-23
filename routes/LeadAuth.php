@@ -16,7 +16,8 @@ Route::middleware('guest:lead')->group(function () {
     Route::get('lead/register', [LeadRegisteredUserController::class, 'create'])
                 ->name('lead.register');
 
-    Route::post('lead/register', [LeadRegisteredUserController::class, 'store']);
+    Route::post('lead/register', [LeadRegisteredUserController::class, 'store'])
+            ->name('lead.store');
 
     Route::get('lead/login', [LeadAuthenticatedSessionController::class, 'create'])
                 ->name('lead.login');

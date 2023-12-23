@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Lead;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lead;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -13,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\Lead;
 
 class LeadRegisteredUserController extends Controller
 {
@@ -30,12 +30,14 @@ class LeadRegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
+    { 
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'email' => 'required|string|email|max:255|unique:'.Lead::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+ 
 
         $user = Lead::create([
             'name' => $request->name,
@@ -43,10 +45,10 @@ class LeadRegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::LEAD_HOME);
     }
 }
