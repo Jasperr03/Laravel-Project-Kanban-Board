@@ -15,8 +15,7 @@ class MediaController extends Controller
               'max' => 'File cannot be larger than 512MB.'
           ]);
   
-          $file = request()->file('file');
-          $cardId = request('card_id'); 
+          $file = request()->file('file'); 
 
 
           
@@ -26,7 +25,7 @@ class MediaController extends Controller
               'mime_type' => $file->getMimeType(),
               'size' => $file->getSize(),
               'user_id' => auth()->id(),
-              'card_id' => $cardId,
+              'card_id' => 1,
           ]);
   
           // media/year/month/day/id
