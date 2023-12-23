@@ -21,8 +21,8 @@
                         
                          
 
-                        <div class="flex" v-for="board in boards" :key="board.id">
-                            <button class="w-3/4 flex uppercase items-center text-center bg-blue-500 text-white rounded hover:bg-blue-700"
+                        <div class="flex gap-2 justify-between" v-for="board in boards" :key="board.id">
+                            <button class="w-1/2 text-xs px-2 flex uppercase items-center text-center bg-blue-500 text-white rounded hover:bg-blue-700"
                                 @click="fetchCardList(board.id, board.name)">
                                 {{ board.name }}
                                 <!-- Display other board details as needed -->
@@ -33,10 +33,30 @@
                                 :href="route('lead.board.status', board?.id)"
                                 method="put"
                                 as="button"
-                                class="w-1/4 inline-flex items-center text-sm font-medium text-gray-700 bg-green-200 rounded-md shadow-sm hover:text-white hover:bg-green-500 focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none"
+                                :class="{
+                                    'bg-red-200': board.archived,
+                                    'bg-blue-200': !board.archived,
+                                    'w-1/2': true,
+                                    'inline-flex': true,
+                                    'items-center': true,
+                                    'text-sm': true,
+                                    'font-medium': true,
+                                    'text-gray-700': true,
+                                    'rounded-md': true,
+                                    'shadow-sm': true,
+                                    'hover:text-white': true,
+                                    'hover:bg-green-500': !board.archived,
+                                    'hover:bg-red-500': board.archived,
+                                    'focus:ring-2': true,
+                                    'focus:ring-offset-2': true,
+                                    'focus:ring-rose-500': true,
+                                    'focus:outline-none': true,
+                                    'p-2': true,
+                                    'text-xs': true,
+                                    'justify-center': true,
+                                }"
                             >
-                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"> <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" clip-rule="evenodd" fill="currentColor" /></svg>
-
+                                
                                 <span>{{ board.archived ? 'Archived' : 'Active' }}</span>
                             </Link>
                         </div>
