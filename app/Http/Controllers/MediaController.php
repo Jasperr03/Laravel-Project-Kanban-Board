@@ -16,6 +16,9 @@ class MediaController extends Controller
           ]);
   
           $file = request()->file('file');
+          $cardId = request('card_id'); 
+
+
           
           $media = Media::create([
               'name' => $file->getClientOriginalName(),
@@ -23,7 +26,7 @@ class MediaController extends Controller
               'mime_type' => $file->getMimeType(),
               'size' => $file->getSize(),
               'user_id' => auth()->id(),
-              'card_id' => 0,
+              'card_id' => $cardId,
           ]);
   
           // media/year/month/day/id

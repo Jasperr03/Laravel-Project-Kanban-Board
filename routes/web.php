@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('/cards', [CardController::class, 'store'])->name('cards.store');
     Route::put('/cards/{card}', [CardController::class, 'update'])->name('cards.update');
     Route::put('/cards/{card}/move', [CardController::class, 'move'])->name('cards.move');
+    Route::put('/cards/status/{card}', [CardController::class, 'status'])->name('cards.status');
     Route::delete('/cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');
     Route::get('cards', [TaskCountController::class, 'index'])->name('cards');
 
@@ -61,7 +62,7 @@ Route::middleware('auth:lead')->group(function () {
     Route::get('/lead/dashboard', [LeadController::class, 'index'])->name('lead.dashboard');
     Route::get('/lead/members', [LeadController::class, 'members'])->name('lead.members');
     Route::get('/lead/user/{id}', [LeadController::class, 'showMember'])->name('lead.member.show');
-
+    Route::put('/lead/board/status/{board}', [LeadController::class, 'status'])->name('lead.board.status');
 });
 
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Lead\LeadAuthenticatedSessionController;
+use App\Http\Controllers\Lead\LeadRegisteredUserController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -12,10 +13,10 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:lead')->group(function () {
-    Route::get('lead/register', [RegisteredUserController::class, 'create'])
+    Route::get('lead/register', [LeadRegisteredUserController::class, 'create'])
                 ->name('lead.register');
 
-    Route::post('lead/register', [RegisteredUserController::class, 'store']);
+    Route::post('lead/register', [LeadRegisteredUserController::class, 'store']);
 
     Route::get('lead/login', [LeadAuthenticatedSessionController::class, 'create'])
                 ->name('lead.login');

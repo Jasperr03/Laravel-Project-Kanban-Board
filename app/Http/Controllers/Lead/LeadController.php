@@ -119,4 +119,15 @@ class LeadController extends Controller
 
         return response()->json(['board' => $board], 201);
     }
+
+    public function status(Board $board)
+    {
+        // Update the card's status
+        $board->update([
+            'archived' => $board->archived == 0 ? 1 : 0,
+        ]);
+ 
+        // Redirect to the 'boards.show' route with the board ID
+        return redirect()->back();
+    }
 }

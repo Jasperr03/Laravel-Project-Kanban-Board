@@ -59,6 +59,18 @@ class CardController extends Controller
         return redirect()->back();
     }
 
+    public function status(Card $card)
+    {
+        // Update the card's status
+        $card->update([
+            'status' => $card->status == 0 ? 1 : 0,
+        ]);
+ 
+        // Redirect to the 'boards.show' route with the board ID
+        return redirect()->back();
+    }
+
+
     public function destroy(Card $card)
     {
         $card->delete();

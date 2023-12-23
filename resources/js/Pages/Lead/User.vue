@@ -17,13 +17,32 @@
                     </div>
 
                     <!-- Display boards -->
-                    <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                        <button class="w-full flex uppercase items-center gap-2 p-1 px-4 bg-blue-500 text-white rounded hover:bg-blue-700"
-                            v-for="board in boards" :key="board.id" @click="fetchCardList(board.id, board.name)">
-                            {{ board.name }}
-                            <!-- Display other board details as needed -->
-                        </button>
-                    </ul>
+                    <div class="max-w-lg space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                        
+                         
+
+                        <div class="flex" v-for="board in boards" :key="board.id">
+                            <button class="w-3/4 flex uppercase items-center text-center bg-blue-500 text-white rounded hover:bg-blue-700"
+                                @click="fetchCardList(board.id, board.name)">
+                                {{ board.name }}
+                                <!-- Display other board details as needed -->
+                            </button>
+ 
+
+                            <Link
+                                :href="route('lead.board.status', board?.id)"
+                                method="put"
+                                as="button"
+                                class="w-1/4 inline-flex items-center text-sm font-medium text-gray-700 bg-green-200 rounded-md shadow-sm hover:text-white hover:bg-green-500 focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none"
+                            >
+                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"> <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" clip-rule="evenodd" fill="currentColor" /></svg>
+
+                                <span>{{ board.archived ? 'Archived' : 'Active' }}</span>
+                            </Link>
+                        </div>
+
+
+                    </div>
                 </div>
                 <div class="w-full mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <div class="flex justify-between align-center mb-4">
@@ -86,6 +105,7 @@
 <script setup>
 import LeadAuthenticatedLayout from '@/Layouts/LeadAuthenticatedLayout.vue';
 import { ref, onMounted, defineProps } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 const { user } = defineProps(['user']);
 const boards = ref([]);

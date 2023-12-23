@@ -5,7 +5,7 @@
                 <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 w-full">
                     <div class="flex gap-2 items-center">
                         <h1 class="text-2xl text-gray-900 m-0">List of Users</h1>
-                          <button @click="openCreateMemberModal" class="flex items-center gap-2 p-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
+                        <button @click="openCreateMemberModal" class="flex items-center gap-2 p-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
                             Create Member
                         </button>
                     </div>

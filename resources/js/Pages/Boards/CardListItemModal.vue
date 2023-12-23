@@ -252,12 +252,22 @@ export default {
                     Actions
                   </h3>
                   <Link
+                    :href="`/cards/status/${card?.id}`"
+                    method="put"
+                    as="button"
+                    class="inline-flex items-center mb-2 px-4 py-2 text-sm font-medium text-gray-700 bg-green-200 rounded-md shadow-sm hover:text-white hover:bg-green-500 focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none"
+                  >
+                     <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"> <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" clip-rule="evenodd" fill="currentColor" /></svg>
+                    <span>{{ card.status ? 'Completed' : 'On Going' }}</span>
+                </Link>
+
+                  <Link
                     :href="`/cards/${card?.id}`"
                     method="delete"
                     as="button"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md shadow-sm hover:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none"
+                    class="inline-flex items-center mb-2 px-4 py-2 text-sm font-medium text-gray-700 bg-rose-200 rounded-md shadow-sm hover:bg-rose-500 hover:text-white focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                     </svg>
                     <span>Delete card</span>
