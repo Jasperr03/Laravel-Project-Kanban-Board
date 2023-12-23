@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Lead;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lead;
