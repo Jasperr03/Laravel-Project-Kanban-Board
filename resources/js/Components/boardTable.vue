@@ -37,7 +37,7 @@ export default {
         },
         downloadCSV() {
             let csvContent = '';
-            const headers = ['ID', 'Name', 'Owner', 'Date Created', 'Date Accomplished'];
+            const headers = ['ID', 'Name', 'Owner', 'Date Created', 'Updated At','Status'];
 
             csvContent += headers.join(',') + '\n';
 
@@ -48,6 +48,7 @@ export default {
                     board.user ? `${board.user.name} - ${board.user.email}` : 'N/A',
                     this.formatDate(board.created_at),
                     this.formatDate(board.updated_at),
+                    board.archived,
                 ];
                 csvContent += rowData.join(',') + '\n';
             });

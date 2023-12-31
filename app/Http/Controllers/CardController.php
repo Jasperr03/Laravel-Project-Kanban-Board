@@ -63,7 +63,7 @@ class CardController extends Controller
     {
         // Update the card's status
         $card->update([
-            'status' => $card->status == 'ongoing' ? 'completed' : 'ongoing',
+            'status' => $card->status == 0 ? 1 : 0,
         ]);
  
         // Redirect to the 'boards.show' route with the board ID
