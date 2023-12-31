@@ -136,9 +136,9 @@ const downloadCSV = () => {
     const filename = `users_${timestamp}.csv`;
 
     const csvContent = "data:text/csv;charset=utf-8," +
-        "ID,Name,Email,Created At\n" +
+        "ID,Name,Email,Project Leader,Created At\n" +
         filteredUsers.value.map(user =>
-            `${user.id},${user.name},${user.email}, ${user.created_at}`
+            `${user.id},${user.name},${user.email},${ user.lead ? user.lead.name : 'N/A' }, ${user.created_at}`
         ).join("\n");
 
     const encodedUri = encodeURI(csvContent);
