@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import { watch } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { Inertia } from '@inertiajs/inertia';
 import { useForm } from '@inertiajs/vue3';
 import TextareaAutosize from '@/Components/TextareaAutosize.vue';
 
@@ -116,7 +115,7 @@ export default {
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" @close="closeModal" class="relative z-10">
       <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
-        leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
+        leave="duration-200 ease-in" leave-from="opacity-0" leave-to="opacity-100">
         <div class="fixed inset-0 bg-black bg-opacity-40" />
       </TransitionChild>
 

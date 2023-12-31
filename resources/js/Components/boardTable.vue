@@ -36,8 +36,8 @@ export default {
             return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
         },
         downloadCSV() {
-            let csvContent = 'data:text/csv;charset=utf-8,';
-            const headers = ['ID', 'Name', 'Owner', 'Date Created'];
+            let csvContent = '';
+            const headers = ['ID', 'Name', 'Owner', 'Date Created', 'Date Accomplished'];
 
             csvContent += headers.join(',') + '\n';
 
@@ -47,6 +47,7 @@ export default {
                     board.name,
                     board.user ? `${board.user.name} - ${board.user.email}` : 'N/A',
                     this.formatDate(board.created_at),
+                    this.formatDate(board.updated_at),
                 ];
                 csvContent += rowData.join(',') + '\n';
             });
