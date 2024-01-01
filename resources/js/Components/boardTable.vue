@@ -27,8 +27,8 @@ export default {
         },
         performSearch() {
             this.filteredBoards = this.boards.filter(board =>
-                board.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-                (board.user && board.user.name.toLowerCase().includes(this.searchTerm.toLowerCase()))
+                board.name && board.archived.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                (board.user && board.user.name && board.name.toLowerCase().includes(this.searchTerm.toLowerCase()))
             );
             this.totalItems = this.filteredBoards.length;
         },
@@ -37,7 +37,7 @@ export default {
         },
         downloadCSV() {
             let csvContent = '';
-            const headers = ['ID', 'Name', 'Owner', 'Date Created', 'Updated At','Status'];
+            const headers = ['ID', 'Name', 'Owner', 'Date Created', 'Updated At','Status','Date Completed'];
 
             csvContent += headers.join(',') + '\n';
 
@@ -49,6 +49,7 @@ export default {
                     this.formatDate(board.created_at),
                     this.formatDate(board.updated_at),
                     board.archived,
+                    this.formatDate(board.completed_at),
                 ];
                 csvContent += rowData.join(',') + '\n';
             });
@@ -112,6 +113,7 @@ export default {
           <th class="py-2 px-4 border-b">Owner</th>
           <th class="py-2 px-4 border-b">Status</th>
           <th class="py-2 px-4 border-b">Date Created</th>
+          <th class="py-2 px-4 border-b">Date Completed</th>
           <!-- Add more columns if needed -->
         </tr>
       </thead>
@@ -127,11 +129,14 @@ export default {
           </td>
           <td class="w-4 p-2 py-4">{{ board.user.name }}</td>
           <td class="w-4 p-2 py-4 text-white">
-            <span class="uppercase py-2 px-4 rounded" :class="[`${ board.archived ? 'bg-red-800':'bg-green-800'}`]">
-              {{ board.archived ? 'Archived' : 'Active' }}
+            <span class="uppercase py-2 px-4 rounded" :class="{ 
+              'bg-green-800': board.archived=='Active', 
+              'bg-red-800': board.archived=='Done',}">
+              {{ board.archived }}
             </span>
           </td>
           <td class="w-4 p-2 py-4">{{ formatDate(board.created_at) }}</td>
+          <td class="w-4 p-2 py-4">{{ formatDate(board.completed_at) }}</td>
           <!-- Add more columns if needed -->
         </tr>
       </tbody>

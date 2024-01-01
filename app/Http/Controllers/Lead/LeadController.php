@@ -122,10 +122,19 @@ class LeadController extends Controller
 
     public function status(Board $board)
     {
-        // Update the card's status
-        $board->update([
-            'archived' => $board->archived == 0 ? 1 : 0,
-        ]);
+        // Update the board's archive status
+        $updateData = [
+            'archived' => $board->archived === 'Active' ? 'Done' : 'Active',
+        ];
+
+        if ($updateData['archived'] === 'Done') {
+            $updateData['completed_at'] = now();
+        } else {
+            $updateData['completed_at'] = null;
+        }
+    
+        // Update the board's status and timestamp
+        $board->update($updateData);
  
         // Redirect to the 'boards.show' route with the board ID
         return redirect()->back();

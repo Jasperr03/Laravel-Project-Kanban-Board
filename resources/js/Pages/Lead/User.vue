@@ -34,8 +34,8 @@
                                 method="put"
                                 as="button"
                                 :class="{
-                                    'bg-red-200': board.archived,
-                                    'bg-blue-200': !board.archived,
+                                    'bg-red-200': board.archived=='Done',
+                                    'bg-green-300': board.archived=='Active',
                                     'w-1/2': true,
                                     'inline-flex': true,
                                     'items-center': true,
@@ -45,8 +45,8 @@
                                     'rounded-md': true,
                                     'shadow-sm': true,
                                     'hover:text-white': true,
-                                    'hover:bg-green-500': !board.archived,
-                                    'hover:bg-red-500': board.archived,
+                                    'hover:bg-green-500': board.archived=='Active',
+                                    'hover:bg-red-500': board.archived=='Done',
                                     'focus:ring-2': true,
                                     'focus:ring-offset-2': true,
                                     'focus:ring-rose-500': true,
@@ -57,7 +57,7 @@
                                 }"
                             >
                                 
-                                <span>{{ board.archived ? 'Archived' : 'Active' }}</span>
+                                <span>{{ board.archived }}</span>
                             </Link>
                         </div>
 
