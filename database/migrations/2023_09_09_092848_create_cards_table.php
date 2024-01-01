@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->longtext('description')->nullable();
             $table->double('position');
-            $table->boolean('status')->default(false);
+            $table->string('status')->default('Ongoing');
             $table->timestamps();
         });
     }

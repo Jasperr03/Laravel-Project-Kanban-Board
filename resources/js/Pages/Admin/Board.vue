@@ -79,7 +79,7 @@
                             <td class="p-4">{{ listItem.title }}</td>  
                             <td class="p-4">
                                 <span class="py-2 px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700" :class="[listItem.status ? 'dark:bg-blue-800' : 'dark:bg-red-800']">
-                                    {{ listItem.status ? 'Completed' : 'Incomplete' }}
+                                    {{ listItem.status }}
                                 </span>
                             </td>
                         </tr>
