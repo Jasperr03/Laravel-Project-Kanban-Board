@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div v-if="listModal" class="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
+            <div v-if="listModal" class="fixed  inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex  items-center justify-center">
               <!-- Modal content -->
               <div class="bg-white p-6 rounded-lg" style="width: 768px;">
                 <div class="flex gap-2 items-center justify-between mb-4">
@@ -65,18 +65,24 @@
                     </button>
                 </div>
                 
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-s-lg">
+                <table class=" w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-s-lg">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th class="py-2 px-4 border-b">{{ listTableheaders[0].text }}</th>
                             <th class="py-2 px-4 border-b">{{ listTableheaders[1].text }}</th>
                             <th class="py-2 px-4 border-b">{{ listTableheaders[2].text }}</th>
+                            <th class="py-2 px-4 border-b">{{ listTableheaders[3].text }}</th>
+                            <th class="py-2 px-4 border-b">{{ listTableheaders[4].text }}</th>
+                            <th class="py-2 px-4 border-b">{{ listTableheaders[5].text }}</th>
                         </tr>
                     </thead>
                     <tbody class="h-50">
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700" v-for="listItem in paginatedLists" :key="listItem.id">
                             <td class="p-4">{{ listItem.id }}</td>
-                            <td class="p-4">{{ listItem.title }}</td>  
+                            <td class="p-4">{{ listItem.title }}</td>
+                            <td class="p-4">{{ listItem.description }}</td>
+                            <td class="p-4">{{ listItem.created_at }}</td>
+                            <td class="p-4">{{ listItem.completed_at }}</td>    
                             <td class="p-4">
                                 <span class="py-2 px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700" :class="[listItem.status ? 'dark:bg-blue-800' : 'dark:bg-red-800']">
                                     {{ listItem.status }}
@@ -159,12 +165,15 @@
 
     const headers = ref([
         { text: 'ID', value: 'id' },
-        { text: 'Name', value: 'name' }, 
+        { text: 'Name', value: 'name' },  
     ]);
 
     const listTableheaders = ref([
         { text: 'ID', value: 'id' },
-        { text: 'Title', value: 'title' }, 
+        { text: 'Title', value: 'title' },
+        { text: 'Description', value: 'description' }, 
+        { text: 'Date Created', value: 'created_at' },
+        { text: 'Date Completed', value: 'completed_at' },
         { text: 'Status', value: 'status' }, 
     ]);
 

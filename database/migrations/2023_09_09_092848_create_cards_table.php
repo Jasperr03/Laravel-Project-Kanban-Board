@@ -21,6 +21,7 @@ return new class extends Migration
             $table->double('position');
             $table->string('status')->default('Ongoing');
             $table->timestamps();
+            $table->timestamp('completed_at')->nullable();
         });
     }
 

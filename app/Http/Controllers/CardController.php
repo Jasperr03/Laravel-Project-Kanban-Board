@@ -62,9 +62,18 @@ class CardController extends Controller
     public function status(Card $card)
     {
         // Update the card's status
-        $card->update([
+        $updateData =[
             'status' => $card->status === 'Ongoing' ? 'Completed' : 'Ongoing',
-        ]);
+        ];
+
+        if ($updateData['status'] === 'Completed') {
+            $updateData['completed_at'] = now();
+        } else {
+            $updateData['completed_at'] = null;
+        }
+    
+        // Update the cards's status and timestamp
+        $card->update($updateData);
  
         // Redirect to the 'boards.show' route with the board ID
         return redirect()->back();
